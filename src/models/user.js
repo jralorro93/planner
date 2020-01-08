@@ -18,5 +18,13 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-
+    password: {
+        type: String,
+        required: true,
+        minlength: 7
+    }
 })
+
+const User = mongoose.Model('User', userSchema)
+
+module.exports = User
