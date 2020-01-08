@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        email: required,
+        required: true,
         trim: true,
         lowercase: true,
         validate(value) {
@@ -25,6 +25,6 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-const User = mongoose.Model('User', userSchema)
+const User = mongoose.model('User', userSchema)
 
 module.exports = User
