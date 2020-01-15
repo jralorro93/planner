@@ -29,9 +29,25 @@ module.exports = {
         }
     },
     patch: async (req, res) => {
+        // Gets the keys from req.body and turns it into an array of keys
+        const updates = Object.keys(req.body)
+        // Make as a checker for updates
+        const allowedUpdates = ['email', 'name', 'password']
+        // Returns true or false, depending on updates and allowedUpdates
+        const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+        if (!isValidOperation) {
+            return res.status(404).send({error: 'Invalid updates'})
+        }
+
         try {
-            const user = await User.findById(req.params.id)
-            console.log('req.body', req.body)
+            const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+            
+            if (!user) {
+                return res.status(404).send()
+            }
+
+            res.send(user)
         } catch(e) {
             res.status(404).send(e)
         }
