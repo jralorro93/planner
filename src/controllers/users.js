@@ -51,6 +51,30 @@ module.exports = {
         } catch(e) {
             res.status(404).send(e)
         }
+    },
+    getUser: async (req, res) => {
+        try {
+            const user = await User.findById(req.params.id)
+            res.status(200).send(user)
+        } catch(e) {
+            res.status(404).send(e)
+        }
+    },
+    deleteUser: async (req, res) => {
+        try {
+            const user = await User.findByIdAndDelete(req.params.id) 
+            console.log('this is user', user)
+            res.send(user)
+        } catch (e){
+            res.status(404).send(e)
+        }    
+    },
+    logout: async (req, res) => {
+        try {
+           const user = req.user
+           console.log('user', user)
+        } catch(e){
+            res.send(500).send(e)
+        }
     }  
-
 }
