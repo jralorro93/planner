@@ -55,7 +55,7 @@ module.exports = {
     getUser: async (req, res) => {
         try {
             const user = await User.findById(req.params.id)
-            res.status(200).send(user)
+            return res.status(200).send(user)
         } catch(e) {
             res.status(404).send(e)
         }
