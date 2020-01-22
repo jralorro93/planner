@@ -48,14 +48,13 @@ module.exports = {
             }
 
             res.send(user)
-        } catch(e) {
+        } catch (e) {
             res.status(404).send(e)
         }
     },
     getUser: async (req, res) => {
         try {
-            const user = await User.findById(req.params.id)
-            return res.status(200).send(user)
+            res.status(200).send(req.user)
         } catch(e) {
             res.status(404).send(e)
         }
