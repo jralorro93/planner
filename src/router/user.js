@@ -12,7 +12,7 @@ router.post('/users/logout', User.logout)
 
 router.patch('/users/:id', auth, User.patch)
 
-router.get('/users/mec', auth, User.getUser)
+router.get('/users/me', auth, User.getUser)
 
 router.delete('/users/:id', User.deleteUser)
 

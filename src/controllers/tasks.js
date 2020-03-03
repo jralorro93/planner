@@ -4,7 +4,13 @@ module.exports = {
     create: async (req, res) => {
         const {title, description} = req.body
         try {
-            // Add stuff here
+            const task = await new Task({
+                title,
+                description,
+                owner: req.user._id
+            })
+            await task.save()
+            return res.status(201).send(task)
         } catch (e) {
             res.status(500).send(e)
         }
